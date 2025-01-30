@@ -8,9 +8,12 @@ app.use(express.json());
 app.use(cors());
 
 // Conectar a MongoDB Atlas
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('✅ Conectado a MongoDB'))
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ Conectado a MongoDB Atlas'))
   .catch(err => console.log('❌ Error de conexión:', err));
+
 
 // Definir un puerto seguro usando la variable de entorno de Render
 const PORT = process.env.PORT || 5000;
