@@ -7,11 +7,20 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Conectar a MongoDB Atlas
+// Importar rutas
+const compromisoRoutes = require('./routes/compromisos');
+app.use('/api/compromisos', compromisoRoutes);
+
+// Conectar a MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Conectado a MongoDB'))
   .catch(err => console.log(err));
 
-app.listen(5000, () => console.log('Servidor corriendo en http://localhost:5000'));
-const compromisoRoutes = require('./routes/compromisos');
-app.use('/api/compromisos', compromisoRoutes);
+// Ruta de prueba para verificar si el servidor está funcionando
+app.get('/', (req, res) => {
+  res.send('API funcionando correctamente');
+});
+
+// Iniciar servidor
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));

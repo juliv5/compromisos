@@ -71,4 +71,13 @@ router.delete('/eliminar/:id', async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  try {
+    const compromisos = await Compromiso.find();
+    res.json(compromisos);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener compromisos' });
+  }
+});
+
 module.exports = router;
