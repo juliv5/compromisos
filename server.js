@@ -8,8 +8,6 @@ app.use(express.json());
 app.use(cors());
 
 // Conectar a MongoDB Atlas
-const mongoose = require('mongoose');
-
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ Conectado a MongoDB Atlas'))
   .catch(err => console.log('❌ Error de conexión:', err));
